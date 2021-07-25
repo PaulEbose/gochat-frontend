@@ -1,8 +1,10 @@
 import { Message } from './types'
 
+type CallbackFunc = (msg: Message) => void
+
 const socket = new WebSocket('ws://localhost:8080/ws')
 
-export function connect() {
+export function connect(cb: CallbackFunc) {
 	socket.onopen = () => {
 		console.log('Socket Connected!')
 	}
@@ -13,6 +15,7 @@ export function connect() {
 
 	socket.onmessage = (msg: MessageEvent<Message>) => {
 		console.log('Incoming Message:', msg)
+		cb(msg.data)
 	}
 
 	socket.onclose = (ev: CloseEvent) => {
