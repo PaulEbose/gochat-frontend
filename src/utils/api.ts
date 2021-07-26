@@ -15,7 +15,7 @@ export function connect(cb: CallbackFunc) {
 
 	socket.onmessage = (msg: MessageEvent<Message>) => {
 		console.log('Incoming Message:', msg)
-		cb(msg.data)
+		cb(JSON.parse(msg.data).body)
 	}
 
 	socket.onclose = (ev: CloseEvent) => {
@@ -23,7 +23,7 @@ export function connect(cb: CallbackFunc) {
 	}
 }
 
-export function sendMsg(msg: Message) {
+export function send(msg: Message) {
 	console.log('Sending Message:', msg)
 	socket.send(msg)
 }

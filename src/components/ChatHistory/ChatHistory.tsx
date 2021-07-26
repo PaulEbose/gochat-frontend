@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react'
 import { Message } from '../../utils/types'
+import ChatMessage from '../ChatMessage/ChatMessage'
 import './ChatHistory.scss'
 
 type ChatHistoryProps = PropsWithChildren<{ msgs: Message[] }>
@@ -10,10 +11,8 @@ function ChatHistory({ msgs }: ChatHistoryProps) {
 			<h2>Chat History</h2>
 
 			{msgs.map((msg, index) => (
-				<p key={index}>{msg}</p>
+				<ChatMessage key={index} msg={msg} />
 			))}
-
-			{JSON.stringify(msgs)}
 		</div>
 	)
 }
